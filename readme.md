@@ -54,7 +54,7 @@ td > a {
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_200_200/0/1588645191329?e=1662595200&v=beta&t=wDzeBAt8J7Sxtu-2Z7e3kdyJjguH01iXHGdbl1Dl7FY width="100px;" alt="Henrique Guimarães"/><br>
+        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_200_200/0/1588645191329?e=1662595200&v=beta&t=wDzeBAt8J7Sxtu-2Z7e3kdyJjguH01iXHGdbl1Dl7FY" width="100px;" alt="Henrique Guimarães"/><br>
         <b>Henrique Guimarães</b>
       </a>
     </td>
