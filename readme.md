@@ -37,7 +37,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center" style="width: 100px; vertical-align: top; line-height: 1.2; border: none!important;">
       <a href="#" style="font-size: 13px;">
-        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_200_200/0/1588645191329?e=1662595200&v=beta&t=wDzeBAt8J7Sxtu-2Z7e3kdyJjguH01iXHGdbl1Dl7FY" width="100px;" alt="Henrique Guimarães" style="border-radius: 50px;"/><br>
+        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_800_800/0/1588645191329?e=1662595200&v=beta&t=uWlJpnMyvzGLXq0eDbPz14uVBGWdxT6vsbbJhVnW6mc" width="100px;" alt="Henrique Guimarães" style="border-radius: 50px;"/><br>
         <b>Henrique Guimarães</b>
       </a>
     </td>

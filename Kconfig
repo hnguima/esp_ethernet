@@ -1,6 +1,36 @@
-menu "MODUTR"
-    config MULTIPOINT
-        bool "Use Multipoint ModUTR protocol instead of point to point"
-        help
-            Use Multipoint ModUTR protocol instead of point to point
+menu "ESP_Ethernet"
+    config ETH_PHY_MDC
+        int "Pino para o MDC da camada física do Ethernet"
+        range 0 36
+        help Pino para o MDC da camada física do Ethernet
+
+    config ETH_PHY_MDIO
+        int "Pino para o MDIO da camada física do Ethernet"
+        range 0 36
+        help Pino para o MDIO da camada física do Ethernet
+
+    config ETH_PHY_RST_CONNECTED
+        bool "Reset da camada física do Ethernet está conectado"
+        default n
+        help Pino para o resistor de reset da camada física do Ethernet
+
+    config ETH_PHY_RST
+        depends on ETH_PHY_RST_CONNECTED
+        int "Pino para o RST da camada física do Ethernet"
+        range 0 36 if ETH_PHY_RST_CONNECTED
+        default 0 if ETH_PHY_RST_CONNECTED
+        default -1
+        help Pino para o RST da camada física do Ethernet
+    
+    config ETH_PHY_ADDR_AUTODETECT
+        bool "Detecção automática do endereço do PHY"
+        default y
+        help Detecção automática do endereço do PHY
+    
+    config ETH_PHY_ADDR
+        depends on ETH_PHY_ADDR_AUTODETECT == n
+        int "Endereço da camada física do Ethernet"
+        default -1
+        range 0 31 if ETH_PHY_ADDR_AUTODETECT == n
+        help Endereço da camada física do Ethernet
 endmenu
