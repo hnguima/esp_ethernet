@@ -33,28 +33,11 @@ O nome da pasta criada deve sempre ser **`esp_ethernet`** e o conteúdo deste re
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-<style>
-td, th {
-   border: none!important;
-}
-td {
-    width: 100px;
-    vertical-align: top;
-    line-height: 1.2;
-}
-td > a > img {
-    border-radius: 50px;
-}
-td > a {
-    font-size: 13px;
-}
-</style>
-
 <table>
   <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_200_200/0/1588645191329?e=1662595200&v=beta&t=wDzeBAt8J7Sxtu-2Z7e3kdyJjguH01iXHGdbl1Dl7FY" width="100px;" alt="Henrique Guimarães"/><br>
+    <td align="center" style="width: 100px; vertical-align: top; line-height: 1.2; border: none!important;">
+      <a href="#" style="font-size: 13px;">
+        <img src="https://media-exp2.licdn.com/dms/image/C4E03AQHDCF-iuQ_krQ/profile-displayphoto-shrink_200_200/0/1588645191329?e=1662595200&v=beta&t=wDzeBAt8J7Sxtu-2Z7e3kdyJjguH01iXHGdbl1Dl7FY" width="100px;" alt="Henrique Guimarães" style="border-radius: 50px;"/><br>
         <b>Henrique Guimarães</b>
       </a>
     </td>
