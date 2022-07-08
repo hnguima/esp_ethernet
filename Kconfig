@@ -1,0 +1,6 @@
+menu "MODUTR"
+    config MULTIPOINT
+        bool "Use Multipoint ModUTR protocol instead of point to point"
+        help
+            Use Multipoint ModUTR protocol instead of point to point
+endmenu
