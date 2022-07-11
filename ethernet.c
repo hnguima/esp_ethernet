@@ -1,14 +1,6 @@
 #include "ethernet.h"
 
 /**
- * Configurações relativa ao PHY
- */
-#define PIN_SMI_MDC 23 // Pinos da interface RMII
-#define PIN_SMI_MDIO 18
-#define PHY_ADDR 0       // Endereço configurado via hardware
-#define PIN_PHY_RESET 33 //-1 = pino de reset do PHY não esta conectado ao ESP32
-
-/**
  * Protótipos:
  */
 
