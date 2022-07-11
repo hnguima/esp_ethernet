@@ -1,14 +1,6 @@
 #include "ethernet.h"
 
 /**
- * @brief 
- * 
- */
-// #define REBOOT_BIT BIT1
- * Debug
- */
-
-/**
  * Configurações relativa ao PHY
  */
 #define PIN_SMI_MDC 23 // Pinos da interface RMII
@@ -101,7 +93,8 @@ esp_err_t ethernet_init(eth_data_t *config)
   /*
    * Inicializa o stack TCP;
    */
-  SYSTEM_ERROR_CHECK(esp_netif_init(), err, TAG, "esp_netif_init error");
+
+  ESP_ETH_ERR_CHECK(esp_netif_init(), err, TAG, "esp_netif_init error");
 
   /*
    * Registra a função de callback do stack TCP;
@@ -116,7 +109,7 @@ esp_err_t ethernet_init(eth_data_t *config)
     goto err;
   }
   // Set default handlers to process TCP/IP stuffs
-  SYSTEM_ERROR_CHECK(esp_eth_set_default_handlers(eth_netif), err, TAG, "esp_eth_set_default_handlers error");
+  ESP_ETH_ERR_CHECK(esp_eth_set_default_handlers(eth_netif), err, TAG, "esp_eth_set_default_handlers error");
 
   // IP fixo ou DHCP?
   uint8_t dhcp_temp = 0; // Força o produto a sempre utilizar ip fixo.
@@ -124,24 +117,24 @@ esp_err_t ethernet_init(eth_data_t *config)
 
   if (dhcp_temp > 0)
   {
-    SYSTEM_ERROR_CHECK(esp_netif_dhcpc_start(eth_netif), err, TAG, "esp_netif_dhcpc_start error");
+    ESP_ETH_ERR_CHECK(esp_netif_dhcpc_start(eth_netif), err, TAG, "esp_netif_dhcpc_start error");
   }
   else
   {
-    SYSTEM_ERROR_CHECK(esp_netif_dhcpc_stop(eth_netif), err, TAG, "esp_netif_dhcpc_stop error");
+    ESP_ETH_ERR_CHECK(esp_netif_dhcpc_stop(eth_netif), err, TAG, "esp_netif_dhcpc_stop error");
     esp_netif_ip_info_t ip_info;
 
     ip_info.ip.addr = config->ip;
     ip_info.netmask.addr = config->mask;
-    ip_info.gw.addr = config->gateway;
+    ip_info.gw.addr = config->gw;
 
     esp_netif_set_ip_info(eth_netif, &ip_info);
   }
 
   // Registra os eventos ocorridos durante o processo de conexão
   // Em IP_EVENT somente GOT_IP é interessante quando utilizando só a conexãoethernet
-  SYSTEM_ERROR_CHECK(esp_event_handler_register(ETH_EVENT, ESP_EVENT_ANY_ID, &eth_event_handler, NULL), err, TAG, "esp_event_handler_register error");
-  SYSTEM_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_ETH_GOT_IP, &got_ip_event_handler, NULL), err, TAG, "esp_event_handler_register error");
+  ESP_ETH_ERR_CHECK(esp_event_handler_register(ETH_EVENT, ESP_EVENT_ANY_ID, &eth_event_handler, NULL), err, TAG, "esp_event_handler_register error");
+  ESP_ETH_ERR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_ETH_GOT_IP, &got_ip_event_handler, NULL), err, TAG, "esp_event_handler_register error");
 
   /*
    * Configura o descritor ethernet do ESP32;
@@ -173,11 +166,11 @@ esp_err_t ethernet_init(eth_data_t *config)
   esp_eth_config_t eth_config = ETH_DEFAULT_CONFIG(mac, phy);
 
   esp_eth_handle_t eth_handle = NULL;
-  SYSTEM_ERROR_CHECK(esp_eth_driver_install(&eth_config, &eth_handle), err, TAG, "esp_eth_driver_install error");
+  ESP_ETH_ERR_CHECK(esp_eth_driver_install(&eth_config, &eth_handle), err, TAG, "esp_eth_driver_install error");
   /* attach Ethernet driver to TCP/IP stack */
-  SYSTEM_ERROR_CHECK(esp_netif_attach(eth_netif, esp_eth_new_netif_glue(eth_handle)), err, TAG, "esp_netif_attach error");
+  ESP_ETH_ERR_CHECK(esp_netif_attach(eth_netif, esp_eth_new_netif_glue(eth_handle)), err, TAG, "esp_netif_attach error");
   /* start Ethernet driver state machine */
-  SYSTEM_ERROR_CHECK(esp_eth_start(eth_handle), err, TAG, "esp_eth_start error");
+  ESP_ETH_ERR_CHECK(esp_eth_start(eth_handle), err, TAG, "esp_eth_start error");
 
   return ESP_OK;
 

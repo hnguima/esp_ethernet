@@ -1,36 +1,41 @@
-menu "ESP_Ethernet"
+menu "ESP Ethernet Component"
+
     config ETH_PHY_MDC
-        int "Pino para o MDC da camada física do Ethernet"
+        int "GPIO pin for PHY MDC signal"
+        default 23
         range 0 36
-        help Pino para o MDC da camada física do Ethernet
+        help 
+            GPIO pin for PHY's MDC signal.
 
     config ETH_PHY_MDIO
-        int "Pino para o MDIO da camada física do Ethernet"
+        int "GPIO pin for PHY MDIO signal"
+        default 18
         range 0 36
-        help Pino para o MDIO da camada física do Ethernet
+        help 
+            GPIO pin for PHY's MDIO signal.
 
     config ETH_PHY_RST_CONNECTED
-        bool "Reset da camada física do Ethernet está conectado"
+        bool "Is the PHY's reset connected to the ESP's GPIO?"
         default n
-        help Pino para o resistor de reset da camada física do Ethernet
+        help
+            Is the PHY's reset connected to the ESP's GPIO?
 
     config ETH_PHY_RST
-        depends on ETH_PHY_RST_CONNECTED
-        int "Pino para o RST da camada física do Ethernet"
-        range 0 36 if ETH_PHY_RST_CONNECTED
-        default 0 if ETH_PHY_RST_CONNECTED
+        int "GPIO pin for PHY's reset signal" if ETH_PHY_RST_CONNECTED
         default -1
-        help Pino para o RST da camada física do Ethernet
+        default 0 if ETH_PHY_RST_CONNECTED
+        range 0 31 if ETH_PHY_RST_CONNECTED
     
     config ETH_PHY_ADDR_AUTODETECT
-        bool "Detecção automática do endereço do PHY"
+        bool "Autodetect the PHY's address"
         default y
-        help Detecção automática do endereço do PHY
-    
-    config ETH_PHY_ADDR
-        depends on ETH_PHY_ADDR_AUTODETECT == n
-        int "Endereço da camada física do Ethernet"
+        help 
+            Autodetect the PHY's address
+
+    config ETH_PHY_ADDR 
+        int "PHY's address value" if !ETH_PHY_ADDR_AUTODETECT
         default -1
-        range 0 31 if ETH_PHY_ADDR_AUTODETECT == n
-        help Endereço da camada física do Ethernet
+        default 0 if !ETH_PHY_ADDR_AUTODETECT
+        range 0 31 if !ETH_PHY_ADDR_AUTODETECT
+                
 endmenu

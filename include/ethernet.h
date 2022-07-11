@@ -41,7 +41,15 @@
 #include "driver/gpio.h"
 #include "driver/periph_ctrl.h"
 
-typedef struct {
+#define ESP_ETH_ERR_CHECK(func, err, tag, message)                                   \
+    err = func;                                                                      \
+    if (err)                                                                         \
+    {                                                                                \
+        ESP_LOGE(tag, "Funcão %s linha %u --> %s", __FUNCTION__, __LINE__, message); \
+    }
+    
+typedef struct
+{
 
     int32_t ip;
     int32_t mask;
