@@ -58,6 +58,5 @@ typedef struct
 } eth_data_t;
 
 esp_err_t ethernet_init(eth_data_t *config);
-// void ethernet_init(void);
 
 #endif //<-- __ESP_ETHERNET___H -->
