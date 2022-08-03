@@ -19,6 +19,8 @@
  * Variáveis Globais;
  */
 static const char *TAG = "eth";
+esp_netif_t *eth_netif;
+
 //
 /**
  * Função de Callback de notificação dos status da comunicação Ethernet;
@@ -66,6 +68,7 @@ static void eth_event_handler(void *arg, esp_event_base_t event_base,
   }
   // return ESP_OK;
 }
+#include "lwip/dns.h"
 
 /** Event handler for IP_EVENT_ETH_GOT_IP */
 static void got_ip_event_handler(void *arg, esp_event_base_t event_base,
@@ -78,6 +81,17 @@ static void got_ip_event_handler(void *arg, esp_event_base_t event_base,
   ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
   const esp_netif_ip_info_t *ip_info = &event->ip_info;
 
+
+  // Set DNS servers for internet connection
+
+  esp_netif_dns_info_t dns_info;
+  dns_info.ip.type = IPADDR_TYPE_V4;
+
+  IP_ADDR4(&dns_info.ip, 8, 8, 8, 8);
+  esp_netif_set_dns_info(eth_netif, ESP_NETIF_DNS_MAIN, &dns_info);
+  IP_ADDR4(&dns_info.ip, 8, 8, 4, 4);
+  esp_netif_set_dns_info(eth_netif, ESP_NETIF_DNS_BACKUP, &dns_info);
+
   ESP_LOGI(TAG, "\nESP_LOGIIP Address"
                 "\n~~~~~~~~~~~~~~~~~~~~~~~~"
                 "\nETHIP:   %03d.%03d.%03d.%03d"
@@ -86,7 +100,6 @@ static void got_ip_event_handler(void *arg, esp_event_base_t event_base,
                 "\n~~~~~~~~~~~~~~~~~~~~~~~~",
            IP2STR(&ip_info->ip), IP2STR(&ip_info->netmask), IP2STR(&ip_info->gw));
 }
-
 esp_err_t ethernet_init(eth_data_t *config)
 {
   esp_err_t err = ESP_OK;
@@ -102,7 +115,7 @@ esp_err_t ethernet_init(eth_data_t *config)
    */
 
   esp_netif_config_t cfg = ESP_NETIF_DEFAULT_ETH();
-  esp_netif_t *eth_netif = esp_netif_new(&cfg);
+  eth_netif = esp_netif_new(&cfg);
   if (eth_netif == NULL)
   {
     ESP_LOGE(TAG, "Failed to create Ethernet netif!");
@@ -129,6 +142,7 @@ esp_err_t ethernet_init(eth_data_t *config)
     ip_info.gw.addr = config->gw;
 
     esp_netif_set_ip_info(eth_netif, &ip_info);
+
   }
 
   // Registra os eventos ocorridos durante o processo de conexão
