@@ -1,46 +1,38 @@
 #ifndef __ESP_ETHERNET___H
 #define __ESP_ETHERNET___H
 
-/**
- * Lib C
- */
+//lib c
 #include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
-/**
- * FreeRTOS
- */
+
+//freeRTOS
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
 #include "freertos/event_groups.h"
 
-/**
- * Logs;
- */
+//logs
 #include "esp_system.h"
 #include "esp_log.h"
 
-/**
- * Callbacks
- */
+//events
 #include "esp_event.h"
 
-/**
- * Ethernet lib
- */
+//ethernet
 #include "esp_eth.h"
 #include "esp_netif.h"
 
-/**
- * Drivers;
- */
-#include "esp32/rom/gpio.h"
-#include "driver/gpio.h"
-#include "driver/periph_ctrl.h"
+//lwip 
+#include "lwip/dns.h"
+#include "lwip/inet.h"
 
+//sntp
+#include "esp_sntp.h"
+
+//error checking
 #define ESP_ETH_ERR_CHECK(func, err, tag, message)                                   \
     err = func;                                                                      \
     if (err)                                                                         \

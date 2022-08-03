@@ -37,5 +37,28 @@ menu "ESP Ethernet Component"
         default -1
         default 0 if !ETH_PHY_ADDR_AUTODETECT
         range 0 31 if !ETH_PHY_ADDR_AUTODETECT
-                
+
+    config ETH_DNS_ENABLE
+        bool "Enable DNS"
+        default y
+        help
+            Enable DNS
+            
+    # config ETH_DNS_PRIMARY_IP
+    #     string "DNS primary IP address" if ETH_DNS_ENABLE
+    #     default "8.8.8.8"
+    #     help
+    #         DNS primary IP address
+
+    # config ETH_DNS_SECONDARY_IP
+    #     string "DNS secondary IP " if ETH_DNS_ENABLE
+    #     default "8.8.4.4"
+    #     help
+    #         DNS secondary IP address
+
+    config ETH_SNTP_ENABLE 
+        bool "Enable SNTP" if ETH_DNS_ENABLE
+        default y
+        help
+            Enable SNTP     
 endmenu
