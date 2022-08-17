@@ -170,7 +170,10 @@ static void got_ip_event_handler(void *arg, esp_event_base_t event_base,
 
 #ifdef CONFIG_ETH_SNTP_ENABLE
   //configure SNTP
-  eth_sntp_init();
+  if(sntp_restart() == false)
+  {
+    eth_sntp_init();
+  }
 #endif //CONFIG_ETH_SNTP_ENABLE
 
 #endif //CONFIG_ETH_DNS_ENABLE
