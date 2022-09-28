@@ -123,7 +123,7 @@ static void eth_dns_configure(void)
 
   IP_ADDR4(&dns_info.ip, 8, 8, 8, 8);
   esp_netif_set_dns_info(eth_netif, ESP_NETIF_DNS_MAIN, &dns_info);
-  IP_ADDR4(&dns_info.ip, 8, 8, 4, 4);
+  IP_ADDR4(&dns_info.ip, 1, 1, 1, 1);
   esp_netif_set_dns_info(eth_netif, ESP_NETIF_DNS_BACKUP, &dns_info);
 }
 
