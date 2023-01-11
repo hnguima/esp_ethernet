@@ -12,7 +12,6 @@
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
-#include "freertos/event_groups.h"
 
 //logs
 #include "esp_system.h"
